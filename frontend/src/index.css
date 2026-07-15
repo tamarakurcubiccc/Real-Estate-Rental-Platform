@@ -1,0 +1,167 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #f8f9fa;
+  color: #212529;
+}
+a { color: #2563eb; text-decoration: none; }
+.container { max-width: 1140px; margin: 0 auto; padding: 0 16px; }
+.brand-blue { color: #1f3864; }
+
+/* navbar */
+.navbar {
+  background: #1f3864; color: #fff; padding: 12px 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,.15);
+}
+.navbar .container { display: flex; align-items: center; gap: 20px; }
+.navbar a { color: #dbe4ff; font-weight: 500; }
+.navbar a:hover { color: #fff; }
+.navbar .brand { font-size: 20px; font-weight: 700; color: #fff; margin-right: auto; }
+.navbar .desno { display: flex; align-items: center; gap: 16px; }
+
+/* dugmad */
+button, .btn {
+  cursor: pointer; border: none; border-radius: 6px;
+  padding: 8px 14px; font-size: 14px; font-weight: 500;
+  background: #2563eb; color: #fff;
+}
+button:hover { background: #1d4ed8; }
+.btn-sek { background: #e5e7eb; color: #1f2933; }
+.btn-sek:hover { background: #d1d5db; }
+.btn-opasno { background: #dc2626; }
+.btn-opasno:hover { background: #b91c1c; }
+.btn-ok { background: #16a34a; }
+.btn-ok:hover { background: #15803d; }
+
+/* forme */
+input, select, textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid #ced4da;
+  border-radius: 6px; font-size: 14px; margin-top: 4px;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; border-color: #86b7fe; box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
+}
+label { display: block; margin-bottom: 12px; font-size: 14px; font-weight: 500; }
+.error { color: #dc2626; font-size: 13px; margin: 8px 0; }
+.success { color: #16a34a; font-size: 13px; margin: 8px 0; }
+
+/* kartice ponude */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+.card {
+  background: #fff; border: 1px solid rgba(0,0,0,.125); border-radius: 8px;
+  overflow: hidden; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+  display: flex; flex-direction: column; color: #212529;
+  transition: transform .15s, box-shadow .15s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15); }
+.card img { width: 100%; height: 190px; object-fit: cover; background: #e9ecef; }
+.card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+.card h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.35; }
+.card .muted { color: #6c757d; font-size: 13px; }
+.price { font-weight: 700; color: #1f3864; font-size: 19px; margin-top: auto; padding-top: 8px; }
+
+/* badge statusa */
+.badge {
+  display: inline-block; padding: 3px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 700; margin-left: 6px;
+  vertical-align: middle; letter-spacing: .3px;
+}
+.b-available { background: #198754; color: #fff; }
+.b-reserved { background: #ffc107; color: #000; }
+.b-rented { background: #dc3545; color: #fff; }
+.b-withdrawn { background: #6c757d; color: #fff; }
+
+.panel {
+  background: #fff; border: 1px solid rgba(0,0,0,.125); border-radius: 8px;
+  padding: 20px; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); margin-bottom: 24px;
+}
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; align-items: end; }
+h1 { font-size: 26px; color: #1f3864; }
+h2 { font-size: 19px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid #dee2e6; font-size: 14px; }
+th { color: #495057; }
+.stars { color: #f59e0b; }
+.amenity-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.amenity-tag {
+  background: #cfe2ff; color: #084298; padding: 4px 10px;
+  border-radius: 4px; font-size: 12px; font-weight: 500;
+}
+.duo { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+@media (max-width: 768px) { .duo { grid-template-columns: 1fr; } }
+
+/* ---------- galerija slika ---------- */
+.gallery {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px; margin-bottom: 16px;
+}
+.gallery img {
+  width: 100%; height: 150px; object-fit: cover; border-radius: .5rem;
+  cursor: pointer; transition: transform .15s, box-shadow .15s; background: #e9ecef;
+}
+.gallery img:hover { transform: scale(1.02); box-shadow: 0 .25rem .75rem rgba(0,0,0,.25); }
+
+/* ---------- lightbox ---------- */
+.lightbox {
+  position: fixed; inset: 0; background: rgba(0,0,0,.85);
+  display: flex; align-items: center; justify-content: center; z-index: 1050;
+}
+.lightbox-content { position: relative; width: 92%; max-width: 1100px; }
+.lightbox-img {
+  width: 100%; max-height: 82vh; object-fit: contain;
+  background: #000; border-radius: 6px; display: block;
+}
+.lightbox-close {
+  position: absolute; top: -44px; right: 0; background: transparent;
+  color: #fff; font-size: 30px; line-height: 1; padding: 4px 10px;
+}
+.lightbox-close:hover { background: transparent; color: #ccc; }
+.lightbox-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,.4); color: #fff; font-size: 26px;
+  padding: 12px 18px; border-radius: 6px;
+}
+.lightbox-arrow:hover { background: rgba(0,0,0,.7); }
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
+.lightbox-counter {
+  text-align: center; color: #fff; font-size: 14px; margin-top: 10px;
+}
+
+/* ---------- pagination ---------- */
+.pagination {
+  display: flex; justify-content: center; gap: 6px;
+  margin-top: 28px; flex-wrap: wrap;
+}
+.pagination button { min-width: 40px; }
+.pagination button:disabled { opacity: .45; cursor: not-allowed; }
+.pagination .active { background: #1f3864; color: #fff; }
+.pagination .active:hover { background: #1f3864; }
+.pagination-info {
+  text-align: center; color: #6c757d; font-size: 13px; margin-top: 10px;
+}
+
+/* ---------- admin galerija ---------- */
+.gallery-admin {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px; margin-bottom: 18px;
+}
+.gallery-admin > div { position: relative; }
+.gallery-admin img {
+  width: 100%; height: 120px; object-fit: cover;
+  border-radius: 6px; background: #e9ecef; display: block;
+}
+.gallery-admin button { width: 100%; margin-top: 4px; }
+.badge-primary {
+  position: absolute; top: 6px; left: 6px;
+  background: #198754; color: #fff; font-size: 11px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+}
+.image-form { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+.image-form > label:first-child { flex: 1; min-width: 240px; margin-bottom: 0; }
+.check-primary {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 0; font-weight: 400; white-space: nowrap;
+}
+.check-primary input { width: auto; margin-top: 0; }
