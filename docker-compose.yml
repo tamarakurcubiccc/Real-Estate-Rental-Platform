@@ -1,0 +1,47 @@
+services:
+  # ---------- PostgreSQL baza ----------
+  db:
+    image: postgres:16-alpine
+    container_name: rental-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-rental}
+      POSTGRES_USER: ${POSTGRES_USER:-rental}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-rental}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-rental} -d ${POSTGRES_DB:-rental}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ---------- Spring Boot backend ----------
+  backend:
+    build: ./backend
+    container_name: rental-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-rental}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-rental}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-rental}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-promeni-me-u-produkciji-najmanje-32-bajta-tajni-kljuc}
+      APP_JWT_EXPIRATION_MS: ${APP_JWT_EXPIRATION_MS:-86400000}
+      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:5173}
+    ports:
+      - "8080:8080"
+
+  # ---------- React frontend (nginx) ----------
+  frontend:
+    build: ./frontend
+    container_name: rental-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  db-data:

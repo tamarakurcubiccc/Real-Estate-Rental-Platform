@@ -1,0 +1,19 @@
+# Backend (Maven)
+target/
+*.class
+*.jar
+
+# Frontend (Node)
+node_modules/
+dist/
+
+# Okruzenje
+.env
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Logovi
+*.log
